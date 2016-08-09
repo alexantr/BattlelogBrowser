@@ -1,4 +1,4 @@
-﻿using Alexantr.BattlelogBrowser.Controls;
+using Alexantr.BattlelogBrowser.Controls;
 using Alexantr.BattlelogBrowser.Handlers;
 using CefSharp;
 using CefSharp.WinForms;

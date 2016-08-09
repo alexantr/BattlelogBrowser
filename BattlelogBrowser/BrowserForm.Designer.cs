@@ -1,4 +1,4 @@
-﻿namespace Alexantr.BattlelogBrowser
+namespace Alexantr.BattlelogBrowser
 {
     partial class BrowserForm
     {
