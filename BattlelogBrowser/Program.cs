@@ -6,6 +6,8 @@ namespace Alexantr.BattlelogBrowser
 {
     static class Program
     {
+        public static string homeUrl = "http://battlelog.battlefield.com/";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

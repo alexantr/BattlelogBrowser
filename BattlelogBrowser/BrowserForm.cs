@@ -11,8 +11,6 @@ namespace Alexantr.BattlelogBrowser
     {
         private readonly ChromiumWebBrowser browser;
 
-        private string homeUrl = "http://battlelog.battlefield.com/";
-
         private bool formStarted = false;
 
         public BrowserForm()
@@ -39,14 +37,7 @@ namespace Alexantr.BattlelogBrowser
 
             formStarted = true;
 
-            // get saved url
-            string url = Properties.Settings.Default.CurrentUrl;
-            if (string.IsNullOrWhiteSpace(url) || !Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
-            {
-                url = homeUrl;
-            }
-
-            browser = new ChromiumWebBrowser(url)
+            browser = new ChromiumWebBrowser(Program.homeUrl)
             {
                 Dock = DockStyle.Fill,
             };
@@ -60,17 +51,8 @@ namespace Alexantr.BattlelogBrowser
             //browser.ConsoleMessage += OnBrowserConsoleMessage;
             //browser.StatusMessage += OnBrowserStatusMessage;
             browser.TitleChanged += OnBrowserTitleChanged;
-            browser.AddressChanged += OnBrowserAddressChanged;
-
-            //var bitness = Environment.Is64BitProcess ? "x64" : "x86";
-            //var version = String.Format("Chromium: {0}, CEF: {1}, CefSharp: {2}, Environment: {3}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, bitness);
-            //DisplayOutput(version);
+            //browser.AddressChanged += OnBrowserAddressChanged;
         }
-
-        /*private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs args)
-        {
-            DisplayOutput(string.Format("Line: {0}, Source: {1}, Message: {2}", args.Line, args.Source, args.Message));
-        }*/
 
         /*private void OnBrowserStatusMessage(object sender, StatusMessageEventArgs args)
         {
@@ -79,9 +61,6 @@ namespace Alexantr.BattlelogBrowser
 
         /*private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
-            SetCanGoBack(args.CanGoBack);
-            SetCanGoForward(args.CanGoForward);
-
             this.InvokeOnUiThreadIfRequired(() => SetIsLoading(!args.CanReload));
         }*/
 
@@ -90,94 +69,10 @@ namespace Alexantr.BattlelogBrowser
             this.InvokeOnUiThreadIfRequired(() => Text = args.Title);
         }
 
-        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs args)
-        {
-            Properties.Settings.Default.CurrentUrl = args.Address;
-            //this.InvokeOnUiThreadIfRequired(() => urlTextBox.Text = args.Address);
-        }
-
-        /*private void SetCanGoBack(bool canGoBack)
-        {
-            this.InvokeOnUiThreadIfRequired(() => backButton.Enabled = canGoBack);
-        }*/
-
-        /*private void SetCanGoForward(bool canGoForward)
-        {
-            this.InvokeOnUiThreadIfRequired(() => forwardButton.Enabled = canGoForward);
-        }*/
-
         /*private void SetIsLoading(bool isLoading)
         {
             //goButton.Text = isLoading ? "Stop" : "Go";
             //goButton.Image = isLoading ? Properties.Resources.stop : Properties.Resources.go;
-
-            HandleToolStripLayout();
-        }*/
-
-        /*private void HandleToolStripLayout(object sender, LayoutEventArgs e)
-        {
-            HandleToolStripLayout();
-        }*/
-
-        /*private void HandleToolStripLayout()
-        {
-            var width = toolStrip.Width;
-            foreach (ToolStripItem item in toolStrip.Items)
-            {
-                if (item != urlTextBox)
-                {
-                    width -= item.Width - item.Margin.Horizontal;
-                }
-            }
-            urlTextBox.Width = Math.Max(0, width - urlTextBox.Margin.Horizontal - 18);
-        }*/
-
-        /*private void GoButton_Click(object sender, EventArgs e)
-        {
-            LoadUrl(urlTextBox.Text);
-        }*/
-
-        /*private void BackButton_Click(object sender, EventArgs e)
-        {
-            browser.Back();
-        }*/
-
-        /*private void ForwardButton_Click(object sender, EventArgs e)
-        {
-            browser.Forward();
-        }*/
-
-        /*private void UrlTextBoxKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter)
-            {
-                return;
-            }
-
-            LoadUrl(urlTextBox.Text);
-        }*/
-
-        /*private void LoadUrl(string url)
-        {
-            if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
-            {
-                browser.Load(url);
-            }
-        }*/
-
-        /*private void goHomeButton_Click(object sender, EventArgs e)
-        {
-            LoadUrl(homeUrl);
-        }*/
-
-        /*private void aboutButton_Click(object sender, EventArgs e)
-        {
-            Version ver = Assembly.GetExecutingAssembly().GetName().Version;
-            string appVersion = ver.Major + "." + ver.Minor + "." + ver.Revision;
-
-            var bits = Environment.Is64BitProcess ? "x64" : "x86";
-            var about = string.Format("Battlelog Browser {3} ({4})\n\nChromium: {0}\nCEF: {1}\nCefSharp: {2}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, appVersion, bits);
-            MessageBox.Show(about, "About Battlelog Browser", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }*/
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
