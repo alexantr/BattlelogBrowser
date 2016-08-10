@@ -49,11 +49,20 @@ namespace Alexantr.BattlelogBrowser
             browser.MenuHandler = new MenuHandler();
 
             browser.TitleChanged += OnBrowserTitleChanged;
+            browser.LoadError += OnLoadError;
         }
 
         private void OnBrowserTitleChanged(object sender, TitleChangedEventArgs args)
         {
             this.InvokeOnUiThreadIfRequired(() => Text = args.Title);
+        }
+
+        private void OnLoadError(object sender, LoadErrorEventArgs args)
+        {
+            if (args.ErrorCode != CefErrorCode.Aborted)
+            {
+                MessageBox.Show(string.Format("Load Error: {0}; {1}", args.ErrorCode, args.ErrorText), "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
