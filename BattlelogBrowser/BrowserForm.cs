@@ -44,6 +44,7 @@ namespace Alexantr.BattlelogBrowser
 
             Controls.Add(browser);
 
+            browser.DownloadHandler = new DownloadHandler();
             browser.LifeSpanHandler = new LifeSpanHandler();
             browser.MenuHandler = new MenuHandler();
 
