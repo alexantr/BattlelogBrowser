@@ -47,33 +47,13 @@ namespace Alexantr.BattlelogBrowser
             browser.LifeSpanHandler = new LifeSpanHandler();
             browser.MenuHandler = new MenuHandler();
 
-            //browser.LoadingStateChanged += OnLoadingStateChanged;
-            //browser.ConsoleMessage += OnBrowserConsoleMessage;
-            //browser.StatusMessage += OnBrowserStatusMessage;
             browser.TitleChanged += OnBrowserTitleChanged;
-            //browser.AddressChanged += OnBrowserAddressChanged;
         }
-
-        /*private void OnBrowserStatusMessage(object sender, StatusMessageEventArgs args)
-        {
-            this.InvokeOnUiThreadIfRequired(() => statusLabel.Text = args.Value);
-        }*/
-
-        /*private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
-        {
-            this.InvokeOnUiThreadIfRequired(() => SetIsLoading(!args.CanReload));
-        }*/
 
         private void OnBrowserTitleChanged(object sender, TitleChangedEventArgs args)
         {
             this.InvokeOnUiThreadIfRequired(() => Text = args.Title);
         }
-
-        /*private void SetIsLoading(bool isLoading)
-        {
-            //goButton.Text = isLoading ? "Stop" : "Go";
-            //goButton.Image = isLoading ? Properties.Resources.stop : Properties.Resources.go;
-        }*/
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {

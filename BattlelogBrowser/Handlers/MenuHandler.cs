@@ -25,11 +25,11 @@ namespace Alexantr.BattlelogBrowser.Handlers
             //Add new custom menu items
             model.AddItem(CefMenuCommand.Reload, "Reload");
             model.AddItem((CefMenuCommand)GoHome, "Go Home");
-            model.AddItem((CefMenuCommand)ShowAddress, "Show Address");
+            model.AddItem((CefMenuCommand)ShowAddress, "Show current URL");
             model.AddSeparator();
-            model.AddItem((CefMenuCommand)ShowDevTools, "Developer Tools");
+            model.AddItem((CefMenuCommand)ShowDevTools, "Developer tools");
             model.AddSeparator();
-            model.AddItem((CefMenuCommand)ShowAbout, "About");
+            model.AddItem((CefMenuCommand)ShowAbout, string.Format("About {0}", Program.appName));
         }
 
         bool IContextMenuHandler.OnContextMenuCommand(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, CefMenuCommand commandId, CefEventFlags eventFlags)
@@ -48,12 +48,12 @@ namespace Alexantr.BattlelogBrowser.Handlers
                 string appVersion = ver.Major + "." + ver.Minor + "." + ver.Revision;
 
                 var bits = Environment.Is64BitProcess ? "x64" : "x86";
-                var about = string.Format("Battlelog Browser {3} ({4})\n\nChromium: {0}\nCEF: {1}\nCefSharp: {2}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, appVersion, bits);
-                MessageBox.Show(about, "About Battlelog Browser", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var about = string.Format("{0} {4} ({5})\n\nChromium: {1}\nCEF: {2}\nCefSharp: {3}", Program.appName, Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, appVersion, bits);
+                MessageBox.Show(about, string.Format("About {0}", Program.appName), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             if ((int)commandId == ShowAddress)
             {
-                MessageBox.Show(browserControl.Address, "Current Address", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(browserControl.Address, "Current URL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return false;
         }
