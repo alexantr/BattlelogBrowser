@@ -24,7 +24,7 @@ namespace Alexantr.BattlelogBrowser
             }
 
             //Perform dependency check to make sure all relevant resources are in our output directory.
-            Cef.Initialize(new CefSettings { CachePath = "cache" }, shutdownOnProcessExit: false, performDependencyCheck: true);
+            Cef.Initialize(new CefSettings { CachePath = "cache" });
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
