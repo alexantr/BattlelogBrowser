@@ -4,7 +4,7 @@ namespace Alexantr.BattlelogBrowser.Handlers
 {
     class DownloadHandler : IDownloadHandler
     {
-        public void OnBeforeDownload(IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+        public void OnBeforeDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
         {
             if (!callback.IsDisposed)
             {
@@ -15,7 +15,7 @@ namespace Alexantr.BattlelogBrowser.Handlers
             }
         }
 
-        public void OnDownloadUpdated(IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
+        public void OnDownloadUpdated(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
         {
 
         }
